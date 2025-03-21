@@ -1,0 +1,92 @@
+<p>empedit works!</p>
+<!-- <p>empadd works!</p> -->
+
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+    <div class="mb-3">
+        <div class="form-group">
+        <label for="ename" class="col-sm-2 col-form-label">Name</label>
+       
+          <input        type="text"
+          class="form-control"
+          [(ngModel)]="employee.ename"
+          id="ename"
+          name="ename"
+          #ename="ngModel"
+          pattern="^[a-zA-Z\s]{1,15}$"
+          required />
+        </div>
+
+    <div class="row mb-3">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+     
+        <input         type="text"
+        class="form-control"
+        [(ngModel)]="employee.email"
+        id="email"
+        name="email"
+        #email="ngModel"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,3}$"
+        required/>
+   
+    </div>
+    <div class="row mb-3">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+     
+        <input         type="text"
+        class="form-control"
+        [(ngModel)]="employee.password"
+        id="password"
+        name="password"
+        #password="ngModel"
+        required/>
+    
+      
+    </div>
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender"  [(ngModel)]="employee.gender" value="Male" checked>
+          <label class="form-check-label" for="gender" >
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender" [(ngModel)]="employee.gender" value="Female">
+          <label class="form-check-label" for="gender">
+           Female
+          </label>
+        </div>
+    </div>
+    
+    </fieldset>
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-2 pt-0">IsMarried</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="isMarried" id="isMarried"   [(ngModel)]="employee.isMarried" value="false" checked>
+            <label class="form-check-label" for="isMarried">
+              Single
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="isMarried" id="isMarried"   [(ngModel)]="employee.isMarried" value="true">
+            <label class="form-check-label" for="isMarried">
+             Married
+            </label>
+          </div>
+         
+        </div>
+      </fieldset>
+      <div>
+        <button
+        (click)="updateEmployee()"
+        [disabled]="!myForm.form.valid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
+      </div>
+    </div>
+  </form>
