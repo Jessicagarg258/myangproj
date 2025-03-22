@@ -14,7 +14,18 @@
           pattern="^[a-zA-Z\s]{1,15}$"
           required />
         </div>
-
+        <span
+        *ngIf="ename.invalid && ename.touched"
+        class="error form-control-feedback"
+        >Enter your Name</span
+      >
+        <pre class="info">
+          Valid? {{ename.valid}}
+          Touched? {{ename.touched}}
+          UnTouched? {{ename.untouched}}
+          Dirty? {{ename.dirty}}
+          Pristine?  {{ename.pristine}}
+        </pre>
     <div class="row mb-3">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
      
@@ -80,7 +91,7 @@
       <div>
         <button
         (click)="addEmployee()"
-        [disabled]="!myForm.form.valid"
+        [disabled]="myForm.invalid"
         type="submit"
         class="btn btn-primary"
       >
