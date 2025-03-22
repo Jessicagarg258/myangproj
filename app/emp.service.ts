@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Employee } from 'src/Employees';
 
 @Injectable({
@@ -32,21 +32,35 @@ export class EmpService {
   }
   constructor(private http:HttpClient){}
   getAllEmployees():Observable<any>{
-    return this.http.get<any>(this.apiUrl+'/listallemp');
+    return this.http.get<any>(this.apiUrl+'/listallempp').pipe(retry(1), catchError(this.handleError));  //shows error 
   }
   createEmployee(employee: Employee):Observable<Employee>{
-    return this.http.post<Employee>(this.apiUrl+'/addemp',employee);
+    return this.http.post<Employee>(this.apiUrl+'/addemp',employee).pipe(retry(1), catchError(this.handleError));
   }
 
   deleteEmployee(id: number): Observable<Employee> {
-    return this.http.delete<Employee>(`${this.apiUrl}/deletebyid/${id}`);
+    return this.http.delete<Employee>(`${this.apiUrl}/deletebyid/${id}`).pipe(retry(1), catchError(this.handleError));
   }
 
   getEmployeeById(id: number): Observable<Employee> {
-    return this.http.get<any>(`${this.apiUrl}/getempbyid/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/getempbyid/${id}`).pipe(retry(1), catchError(this.handleError));
   }
   updateEmployee(employee: Employee): Observable<Employee> {
     return this.http.put<Employee>(this.apiUrl + '/updateemp', employee);
+  }
+
+  handleError(error:any){
+    let errorMessage='';
+    if(error.error instanceof ErrorEvent){
+      errorMessage=error.error.message;
+    }
+    else{
+      errorMessage=`Error Code :${error.status}\n Error Message:${error.message}`;
+    }
+
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+
   }
 
 }
