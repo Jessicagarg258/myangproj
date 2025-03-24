@@ -22,9 +22,9 @@
                 </td>
                 <td>{{emp.ename}}</td>
                 <td>{{emp.email}}</td>
-                <td>{{emp.password}}</td>
+                <td>{{emp.password | passwordMask}}</td>
                 <td>{{emp.gender}}</td>
-                <td>{{emp.isMarried}}</td>
+                <td>{{emp.isMarried | booleanToText}}</td>
                 <td>
                   <button (click)="onDelete(emp)">X</button>
                 </td>
