@@ -1,7 +1,54 @@
 <p>login works!</p>
-<div>
+<!-- <div>
     <h2>Login</h2>
     <input type="text" placeholder="Username" [(ngModel)]="user.username"/>
     <input type="password" placeholder="Password" [(ngModel)]="user.password"/>
     <button (click)="login()">Login</button>
-</div>
+</div> -->
+
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <!-- Username Field -->
+    <input type="text" placeholder="Username" formControlName="username" />
+    <div
+      *ngIf="
+        f['username'].invalid && (f['username'].dirty || f['username'].touched)
+      "
+      class="error"
+    >
+      <span *ngIf="f['username'].errors?.['required']"
+        >Username is required.</span
+      >
+      <span *ngIf="f['username'].errors?.['minlength']"
+        >Username must be at least 3 characters long.</span
+      >
+      <span *ngIf="f['username'].errors?.['pattern']"
+        >Username must be alphanumeric.</span
+      >
+    </div>
+  
+    <!-- Password Field -->
+    <input type="password" placeholder="Password" formControlName="password" />
+    <div
+      *ngIf="
+        f['password'].invalid && (f['password'].dirty || f['password'].touched)
+      "
+      class="error"
+    >
+      <span *ngIf="f['password'].errors?.['required']"
+        >Password is required.</span
+      >
+      <span *ngIf="f['password'].errors?.['minlength']"
+        >Password must be at least 6 characters long.</span
+      >
+      <span *ngIf="!hasUpperCase()"
+        >Password must contain at least one uppercase letter.</span
+      >
+      <span *ngIf="!hasNumber()">Password must contain at least one number.</span>
+      <span *ngIf="!hasSpecialCharacter()"
+        >Password must contain at least one special character.</span
+      >
+    </div>
+  
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
