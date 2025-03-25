@@ -11,10 +11,12 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { EmpaddComponent } from './empadd/empadd.component';
 import { HomeComponent } from './home/home.component';
 import { EmplistComponent } from './emplist/emplist.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmpeditComponent } from './empedit/empedit.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BooleanToTextPipe } from './boolean-to-text.pipe';
+import { PasswordMaskPipe } from './password-mask.pipe';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,13 @@ import { RegisterComponent } from './register/register.component';
     EmplistComponent,
     EmpeditComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BooleanToTextPipe,
+    PasswordMaskPipe
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule
